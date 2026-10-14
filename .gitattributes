@@ -1,0 +1,24 @@
+# Use Unity's semantic YAML merge tool for Unity serialized files, so that
+# conflicts on scenes/prefabs/etc. are resolved structurally instead of as
+# plain text (plain-text merges of these files can corrupt fileID references).
+#
+# Note: this only tells Git WHICH driver to use (shared via this file).
+# Each developer must still register the driver itself in their own git
+# config (global, since the path to the Unity Editor differs per machine):
+#
+#   git config --global merge.unityyamlmerge.name "Unity SmartMerge (UnityYamlMerge)"
+#   git config --global merge.unityyamlmerge.driver "'<path-to-UnityYAMLMerge.exe>' merge -p \"%O\" \"%B\" \"%A\" \"%A\""
+#   git config --global merge.unityyamlmerge.recursive binary
+#
+# Example path for Unity 2022.3.19f1 on Windows via Unity Hub:
+#   C:/Program Files/Unity/Hub/Editor/2022.3.19f1/Editor/Data/Tools/UnityYAMLMerge.exe
+
+*.unity merge=unityyamlmerge
+*.prefab merge=unityyamlmerge
+*.asset merge=unityyamlmerge
+*.meta merge=unityyamlmerge
+*.controller merge=unityyamlmerge
+*.anim merge=unityyamlmerge
+*.mat merge=unityyamlmerge
+*.physicMaterial merge=unityyamlmerge
+*.physicsMaterial2D merge=unityyamlmerge
