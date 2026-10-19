@@ -1858,7 +1858,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2247866198975979421, guid: 07b7f8a804e63634f955aa6ada93e450,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 526748330}
+      addedObject: {fileID: 526748335}
   m_SourcePrefab: {fileID: 100100000, guid: 07b7f8a804e63634f955aa6ada93e450, type: 3}
 --- !u!1 &526748328 stripped
 GameObject:
@@ -1872,7 +1872,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 526748327}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &526748330
+--- !u!114 &526748335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1887,7 +1887,7 @@ MonoBehaviour:
   exportMenuCanvas: {fileID: 267923082}
   vrCamera: {fileID: 526748329}
   spawnDistance: 1
-  menuButton: {fileID: 4116954447336496447, guid: 0be0028c24f2a4c14a96b6aa39055933,
+  menuButton: {fileID: -8069514856583376848, guid: 0be0028c24f2a4c14a96b6aa39055933,
     type: 3}
 --- !u!1 &562518740
 GameObject:
