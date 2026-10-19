@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: -3922606453594849371}
   - component: {fileID: 5562137146097084318}
   - component: {fileID: 511611444323645410}
+  - component: {fileID: 2535579700603462328}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -510,6 +511,20 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &2535579700603462328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867797962337078453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af643bc75d5f7c41b851474a8e7e1fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: Checkpoint
+  IsLocked: 0
 --- !u!1 &3062576257710070370
 GameObject:
   m_ObjectHideFlags: 0

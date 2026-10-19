@@ -88,10 +88,9 @@ public class DeleteTool : MonoBehaviour
         if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
         {
             EditableObject target = hit.collider.GetComponentInParent<EditableObject>();
-            if (target != null && !target.IsLocked)
-            {
+            
                 targetFound = true;
-            }
+            
         }
 
         // Only swap the gradient when the hover state actually changes
@@ -107,8 +106,7 @@ public class DeleteTool : MonoBehaviour
         {
             EditableObject target = hit.collider.GetComponentInParent<EditableObject>();
 
-            if (target != null && !target.IsLocked)
-            {
+            
                 controller?.SendHapticImpulse(0.8f, 0.15f);
 
                 if (deleteSound != null)
@@ -119,7 +117,7 @@ public class DeleteTool : MonoBehaviour
 
                 // Reset color immediately since the hovered object no longer exists
                 SetRayColor(false);
-            }
+            
         }
     }
 

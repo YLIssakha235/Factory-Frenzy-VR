@@ -2,31 +2,49 @@ using UnityEngine;
 
 public class EditableObject : MonoBehaviour
 {
-    [Header("Item Info")]
-    public string itemType = "Platform_Basic"; // ID matching the PC team's prefab list
+    [Header("Platform Identity")]
+    [Tooltip("Select which of the 9 types this prefab is")]
+    public LevelItemType itemType;
 
-    [Header("State")]
-    public bool IsLocked = false;
+    public bool isLocked = false;
+    private string instanceId;
 
-    // Call this whenever an item is spawned
+    private void Awake()
+    {
+        // Generate a unique ID for this specific block in the level
+        instanceId = System.Guid.NewGuid().ToString();
+    }
+
     private void Start()
     {
+        // Tell the LevelManager that this object exists in the scene
         if (LevelManager.Instance != null)
         {
             LevelManager.Instance.RegisterObject(this);
         }
     }
 
-    public void ToggleLock()
+    private void OnDestroy()
     {
-        IsLocked = !IsLocked;
+        // Remove it from the export list if you delete it with your VR laser
+        if (LevelManager.Instance != null)
+        {
+            LevelManager.Instance.UnregisterObject(this);
+        }
     }
 
-    public class PlatformData
+    // The LevelManager calls this when you press the Export button
+    public ObjectData ToData()
     {
-        public string type;
-        public Vector3 position;
-        public Quaternion rotation;
-        public Vector3 scale;
+        return new ObjectData
+        {
+            instanceId = this.instanceId,
+            // Converts your enum (e.g., LevelItemType.Bumper) into a string ("Bumper") for the JSON
+            itemType = this.itemType.ToString(),
+            position = new SerializableVector3(transform.position),
+            rotation = new SerializableQuaternion(transform.rotation),
+            scale = new SerializableVector3(transform.localScale),
+            isLocked = this.isLocked
+        };
     }
 }
