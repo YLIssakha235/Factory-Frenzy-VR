@@ -8,14 +8,29 @@ public class ExportMenuToggler : MonoBehaviour
     [SerializeField] private Transform vrCamera;
     [SerializeField] private float spawnDistance = 1.0f;
 
-    // No input variables, no Update loop!
+    [Header("Input Binding")]
+    [SerializeField] private InputActionProperty menuButtonAction;
 
-    // This method is now triggered externally by the Player Input component
-    public void ToggleMenu(InputAction.CallbackContext context)
+    private void OnEnable()
     {
-        // Only fire once when the button is fully pressed down
-        if (!context.performed) return;
+        if (menuButtonAction.action != null)
+        {
+            menuButtonAction.action.Enable();
+            menuButtonAction.action.performed += OnMenuButtonPressed;
+        }
+    }
 
+    private void OnDisable()
+    {
+        if (menuButtonAction.action != null)
+        {
+            menuButtonAction.action.performed -= OnMenuButtonPressed;
+            menuButtonAction.action.Disable();
+        }
+    }
+
+    private void OnMenuButtonPressed(InputAction.CallbackContext context)
+    {
         if (exportMenuCanvas == null) return;
 
         bool isOpening = !exportMenuCanvas.activeSelf;
