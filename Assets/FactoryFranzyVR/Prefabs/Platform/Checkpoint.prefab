@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 5562137146097084318}
   - component: {fileID: 511611444323645410}
   - component: {fileID: 2535579700603462328}
+  - component: {fileID: 6451120295414148368}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -523,8 +524,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af643bc75d5f7c41b851474a8e7e1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: Checkpoint
-  IsLocked: 0
+  itemType: 0
+  isLocked: 0
+--- !u!114 &6451120295414148368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867797962337078453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fb34767edabbf4f821e17a4e05f415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationStep: 10
+  snapSurfaces:
+    serializedVersion: 2
+    m_Bits: 0
+  ghostMaterial: {fileID: 2100000, guid: ae161c523aa7443409f0b7f1f8d2d864, type: 2}
 --- !u!1 &3062576257710070370
 GameObject:
   m_ObjectHideFlags: 0

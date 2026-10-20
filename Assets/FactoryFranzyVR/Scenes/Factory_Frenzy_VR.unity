@@ -2751,6 +2751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1704739436}
   - component: {fileID: 1704739437}
+  - component: {fileID: 1704739438}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -2785,6 +2786,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce88bc626a0f914409c9cfaed82a5b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1704739438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704739435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24a76b5ed03294a4aaa231228defe04f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleButton:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Toggle Button
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: c24795d5-d835-410f-8613-e03fbd5b91e0
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 349b54a8-ec3b-406c-95a8-c4c573570d90
+        m_Path: <XRController>{LeftHand}/{PrimaryButton}
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Toggle Button
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!1 &1705614432
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,7 +3318,7 @@ GameObject:
   - component: {fileID: 2007966027}
   - component: {fileID: 2007966026}
   - component: {fileID: 2007966025}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Floor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4403,17 +4436,17 @@ PrefabInstance:
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
@@ -4671,8 +4704,8 @@ SceneRoots:
   - {fileID: 535343156928600489}
   - {fileID: 526748327}
   - {fileID: 987967581}
-  - {fileID: 3301186224424311301}
   - {fileID: 1704739436}
   - {fileID: 2007966024}
   - {fileID: 267923086}
   - {fileID: 1698030609}
+  - {fileID: 3301186224424311301}
