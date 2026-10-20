@@ -1789,6 +1789,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4059094399416301613, guid: 07b7f8a804e63634f955aa6ada93e450,
         type: 3}
+      propertyPath: m_HitDetectionType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059094399416301613, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
       propertyPath: m_RaycastMask.m_Bits
       value: 2147484193
       objectReference: {fileID: 0}
@@ -1914,6 +1919,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 526748335}
+    - targetCorrespondingSourceObject: {fileID: 2247866198975979421, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 526748340}
   m_SourcePrefab: {fileID: 100100000, guid: 07b7f8a804e63634f955aa6ada93e450, type: 3}
 --- !u!1 &526748328 stripped
 GameObject:
@@ -1962,6 +1971,92 @@ MonoBehaviour:
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
+--- !u!114 &526748338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3316982059780674902, guid: 07b7f8a804e63634f955aa6ada93e450,
+    type: 3}
+  m_PrefabInstance: {fileID: 526748327}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526748328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caff514de9b15ad48ab85dcff5508221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &526748340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526748328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311b28ed343b7954a8170579ec0cb397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayInteractor: {fileID: 99462434}
+  lineVisual: {fileID: 1695218876}
+  controller: {fileID: 526748338}
+  toggleSound: {fileID: 0}
+  toggleLockModeAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Toggle Lock Mode
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 5d002acb-b1ec-46c0-b318-c6e4ca085995
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 7950543a-eef6-4b83-b652-615e9b181260
+        m_Path: <Keyboard>/c
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Toggle Lock Mode
+        m_Flags: 0
+      - m_Name: 
+        m_Id: a4d6579e-5c05-4cb3-9f37-9426ab66c39b
+        m_Path: <XRController>{RightHand}/{PrimaryButton}
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Toggle Lock Mode
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  confirmLockAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Confirm Lock
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e669bbea-38ec-476c-9fb1-a1449ac52586
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: e5679707-9308-43ef-8c76-1fc6a247d150
+        m_Path: <Keyboard>/c
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Confirm Lock
+        m_Flags: 0
+      - m_Name: 
+        m_Id: d4f7883d-7e76-499a-8a53-e9d0785ba79c
+        m_Path: <XRController>{RightHand}/{PrimaryButton}
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Confirm Lock
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  lockHoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &562518740
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,6 +2818,18 @@ MonoBehaviour:
     m_Reference: {fileID: 0}
   normalColor: {r: 0.29563695, g: 0.807288, b: 0.9308176, a: 1}
   deleteHoverColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &1695218876 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6766987014965302666, guid: 07b7f8a804e63634f955aa6ada93e450,
+    type: 3}
+  m_PrefabInstance: {fileID: 526748327}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e988983f96fe1dd48800bcdfc82f23e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1698030609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4481,17 +4588,17 @@ PrefabInstance:
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.911
+      value: -0.44
       objectReference: {fileID: 0}
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.82
+      value: 4.07
       objectReference: {fileID: 0}
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.77
+      value: 2.59
       objectReference: {fileID: 0}
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
