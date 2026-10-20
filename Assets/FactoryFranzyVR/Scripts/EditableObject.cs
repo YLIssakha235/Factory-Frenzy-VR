@@ -44,7 +44,6 @@ public class EditableObject : MonoBehaviour
             position = new SerializableVector3(transform.position),
             rotation = new SerializableQuaternion(transform.rotation),
             scale = new SerializableVector3(transform.localScale),
-            isLocked = this.isLocked
         };
     }
 }

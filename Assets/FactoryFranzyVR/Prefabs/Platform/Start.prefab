@@ -857,6 +857,7 @@ GameObject:
   - component: {fileID: 7966754288895920397}
   - component: {fileID: -8630870892695896946}
   - component: {fileID: 6021798741212804761}
+  - component: {fileID: -5107464894213158196}
   m_Layer: 0
   m_Name: Start
   m_TagString: Untagged
@@ -874,7 +875,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9087882912985057129}
@@ -1095,8 +1096,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af643bc75d5f7c41b851474a8e7e1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: Start
-  IsLocked: 0
+  itemType: 0
+  isLocked: 0
+--- !u!114 &-5107464894213158196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5946239736828717482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fb34767edabbf4f821e17a4e05f415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: 0.3
+  heightStep: 5
+  rotationStep: 10
+  snapSurfaces:
+    serializedVersion: 2
+    m_Bits: 512
+  ghostMaterial: {fileID: 7390553463975553142, guid: 7ab6f3b0fd1a6ba41b2a47766c16613f,
+    type: 3}
 --- !u!1 &5964233062384486387
 GameObject:
   m_ObjectHideFlags: 0

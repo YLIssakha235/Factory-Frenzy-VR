@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8830785415642649361}
   - component: {fileID: -1255692118587851090}
   - component: {fileID: 6358366259850804736}
+  - component: {fileID: -1533715836116521473}
   m_Layer: 0
   m_Name: Classic
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1024677016816198496}
@@ -227,8 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af643bc75d5f7c41b851474a8e7e1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: Classic
-  IsLocked: 1
+  itemType: 1
+  isLocked: 0
 --- !u!65 &6358366259850804736
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -250,6 +251,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1533715836116521473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470491479853856798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fb34767edabbf4f821e17a4e05f415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: 0.3
+  heightStep: 1
+  rotationStep: 1
+  snapSurfaces:
+    serializedVersion: 2
+    m_Bits: 512
+  ghostMaterial: {fileID: 2100000, guid: cd9f41a9a23cdea4b942b483b8b7ab4d, type: 2}
 --- !u!1 &1529145953439139290
 GameObject:
   m_ObjectHideFlags: 0
