@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class DeleteTool : MonoBehaviour
+public class DeleteManager : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private XRRayInteractor rayInteractor;
@@ -21,6 +21,7 @@ public class DeleteTool : MonoBehaviour
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color deleteHoverColor = Color.red;
 
+    private AudioSource audioSource;
     private Gradient normalGradient;
     private Gradient deleteHoverGradient;
 
@@ -31,6 +32,15 @@ public class DeleteTool : MonoBehaviour
     {
         if (lineVisual == null)
             lineVisual = GetComponent<XRInteractorLineVisual>();
+
+        // Dedicated AudioSource avoids instantiation latency on delete
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.spatialBlend = 0f; // 2D clean playback directly in ears, or 1f for 3D positional
+        }
 
         normalGradient = CreateSolidGradient(normalColor);
         deleteHoverGradient = CreateSolidGradient(deleteHoverColor);
@@ -59,14 +69,12 @@ public class DeleteTool : MonoBehaviour
             isDeleteModeActive = !isDeleteModeActive;
             controller?.SendHapticImpulse(0.3f, 0.1f);
 
-            // Revert back to normal if turning mode off
             if (!isDeleteModeActive)
             {
                 SetRayColor(false);
             }
         }
 
-        // If Delete Mode is inactive, keep default color and stop here
         if (!isDeleteModeActive) return;
 
         // 2. Continuously check what the ray is pointing at
@@ -88,12 +96,12 @@ public class DeleteTool : MonoBehaviour
         if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
         {
             EditableObject target = hit.collider.GetComponentInParent<EditableObject>();
-            
+            if (target != null)
+            {
                 targetFound = true;
-            
+            }
         }
 
-        // Only swap the gradient when the hover state actually changes
         if (targetFound != isCurrentlyHovering)
         {
             SetRayColor(targetFound);
@@ -102,22 +110,25 @@ public class DeleteTool : MonoBehaviour
 
     private void TryDeleteTarget()
     {
-        if (rayInteractor != null && rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
+        if (rayInteractor == null) return;
+
+        if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
         {
             EditableObject target = hit.collider.GetComponentInParent<EditableObject>();
+            if (target == null) return;
 
-            
-                controller?.SendHapticImpulse(0.8f, 0.15f);
+            controller?.SendHapticImpulse(0.8f, 0.15f);
 
-                if (deleteSound != null)
-                    AudioSource.PlayClipAtPoint(deleteSound, hit.point);
+            // Play sound immediately before object destruction
+            if (deleteSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(deleteSound);
+            }
 
-                LevelManager.Instance?.UnregisterObject(target);
-                Destroy(target.gameObject);
+            LevelManager.Instance?.UnregisterObject(target);
+            Destroy(target.gameObject);
 
-                // Reset color immediately since the hovered object no longer exists
-                SetRayColor(false);
-            
+            SetRayColor(false);
         }
     }
 

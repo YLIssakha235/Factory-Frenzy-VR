@@ -5853,7 +5853,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.012, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1982301727176049579}
@@ -6073,8 +6073,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af643bc75d5f7c41b851474a8e7e1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: Fan
-  IsLocked: 0
+  itemType: 7
+  isLocked: 0
 --- !u!1 &8694203286054048390
 GameObject:
   m_ObjectHideFlags: 0

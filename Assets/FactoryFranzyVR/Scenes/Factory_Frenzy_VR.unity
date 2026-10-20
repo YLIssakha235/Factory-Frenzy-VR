@@ -1777,6 +1777,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2065996373467795027, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383415059909163066, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059094399416301613, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 2147484193
+      objectReference: {fileID: 0}
     - target: {fileID: 4115599456327626605, guid: 07b7f8a804e63634f955aa6ada93e450,
         type: 3}
       propertyPath: m_Name
@@ -1787,10 +1802,40 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4222910322736951814, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 2147484193
+      objectReference: {fileID: 0}
     - target: {fileID: 4465562311191071599, guid: 07b7f8a804e63634f955aa6ada93e450,
         type: 3}
       propertyPath: m_SmoothMotionEnabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862853605189629726, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 2147484193
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545548100832768523, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 2147484193
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457067258758678401, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457067258758678401, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457067258758678401, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7457067258758678401, guid: 07b7f8a804e63634f955aa6ada93e450,
         type: 3}
@@ -1845,6 +1890,11 @@ PrefabInstance:
     - target: {fileID: 7717350411271867718, guid: 07b7f8a804e63634f955aa6ada93e450,
         type: 3}
       propertyPath: m_SmoothMotionEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783772424195573174, guid: 07b7f8a804e63634f955aa6ada93e450,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9220510183831517481, guid: 07b7f8a804e63634f955aa6ada93e450,
@@ -2614,7 +2664,7 @@ MonoBehaviour:
   rayInteractor: {fileID: 932093285}
   lineVisual: {fileID: 1431577152}
   controller: {fileID: 1422861276}
-  deleteSound: {fileID: 0}
+  deleteSound: {fileID: 8300000, guid: 4b69dcadd79e0c042bc03f2244077c61, type: 3}
   toggleDeleteModeAction:
     m_UseReference: 0
     m_Action:
@@ -2655,15 +2705,15 @@ MonoBehaviour:
       m_SingletonActionBindings:
       - m_Name: 
         m_Id: 10ca9c52-e046-421e-be1b-99fb9c5b292b
-        m_Path: <Keyboard>/f
+        m_Path: <Keyboard>/r
         m_Interactions: 
         m_Processors: 
         m_Groups: 
         m_Action: Confirm Delete
         m_Flags: 0
       - m_Name: 
-        m_Id: 6e537c1a-a974-4d4b-a2d4-bc337082278f
-        m_Path: <XRController>{LeftHand}/secondaryButton
+        m_Id: 82f2fdc1-ce6f-4336-a06d-ebc4fe160628
+        m_Path: <XRController>{LeftHand}/{TriggerButton}
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -3335,7 +3385,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -1.6077809e-13, z: 1.6077687e-13, w: 0.7071068}
   m_LocalPosition: {x: -0.0000012388, y: 0.000000029802, z: 0.000000020143}
-  m_LocalScale: {x: 6.4343038, y: 4.5977, z: 1}
+  m_LocalScale: {x: 49.63293, y: 103.21837, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4415,13 +4465,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.911
       objectReference: {fileID: 0}
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.309
+      value: 4.82
       objectReference: {fileID: 0}
     - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}
@@ -4462,6 +4527,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2997285430909464956, guid: 704ce371ee6393345aef0d7a72cb238b,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3237110426379872364, guid: 704ce371ee6393345aef0d7a72cb238b,
         type: 3}

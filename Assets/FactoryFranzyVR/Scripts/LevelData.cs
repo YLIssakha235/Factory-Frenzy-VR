@@ -26,7 +26,6 @@ public class ObjectData
     public SerializableVector3 position;
     public SerializableQuaternion rotation;
     public SerializableVector3 scale;
-    public bool isLocked;
 }
 
 [Serializable]

@@ -5,8 +5,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class VRSnapPlacement : MonoBehaviour
 {
     [Header("Snap Settings")]
-    public float gridSize = 0.3f;    // The width of your platforms
-    public float rotationStep = 10f; // Angle constraints
+    public float gridSize = 0.3f;
+    public float heightStep = 5.0f;  // NEW: Controls the vertical snap intervals (0, 5, 10, 15...)
+    public float rotationStep = 10f;
+    public LayerMask snapSurfaces;
     public Material ghostMaterial;
 
     private XRGrabInteractable grabInteractable;
@@ -17,22 +19,20 @@ public class VRSnapPlacement : MonoBehaviour
         grabInteractable = GetComponent<XRGrabInteractable>();
         grabInteractable.selectExited.AddListener(OnRelease);
 
-        // Auto-generate the Ghost visual
         ghostObject = new GameObject(gameObject.name + "_Ghost");
         MeshFilter mf = ghostObject.AddComponent<MeshFilter>();
         MeshRenderer mr = ghostObject.AddComponent<MeshRenderer>();
 
-        MeshFilter myMf = GetComponent<MeshFilter>();
+        MeshFilter myMf = GetComponentInChildren<MeshFilter>();
         if (myMf != null) mf.sharedMesh = myMf.sharedMesh;
-        mr.material = ghostMaterial;
 
-        ghostObject.transform.localScale = transform.localScale;
+        mr.material = ghostMaterial;
+        ghostObject.transform.localScale = transform.localScale * 1.02f;
         ghostObject.SetActive(false);
     }
 
     private void Update()
     {
-        // Hide ghost if not held or if Smart Mode is off
         if (!grabInteractable.isSelected || !SmartPlacementToggler.IsSmartModeActive)
         {
             if (ghostObject.activeSelf) ghostObject.SetActive(false);
@@ -41,16 +41,32 @@ public class VRSnapPlacement : MonoBehaviour
 
         if (!ghostObject.activeSelf) ghostObject.SetActive(true);
 
-        // 1. Grid Snap (Side-by-side alignment)
+        // 1. Horizontal Grid Snap
         Vector3 currentPos = transform.position;
-        Vector3 snappedPos = new Vector3(
-            Mathf.Round(currentPos.x / gridSize) * gridSize,
-            Mathf.Round(currentPos.y / gridSize) * gridSize,
-            Mathf.Round(currentPos.z / gridSize) * gridSize
-        );
-        ghostObject.transform.position = snappedPos;
+        float snappedX = Mathf.Round(currentPos.x / gridSize) * gridSize;
+        float snappedZ = Mathf.Round(currentPos.z / gridSize) * gridSize;
+        float snappedY = currentPos.y;
 
-        // 2. Angle Snap
+        // 2. Vertical Grid Snap based on Floor Distance
+        // Increased raycast distance to 100 to easily find the floor from high up
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 100.0f, snapSurfaces))
+        {
+            // Calculate how high the object is currently held above the floor
+            float heightAboveFloor = currentPos.y - hit.point.y;
+
+            // Round that height to the nearest step (e.g., 0, 5, 10, 15)
+            float snappedHeightOffset = Mathf.Round(heightAboveFloor / heightStep) * heightStep;
+
+            // Prevent the object from snapping underground
+            snappedHeightOffset = Mathf.Max(0, snappedHeightOffset);
+
+            // Final Y = Base floor height + height step + half object thickness
+            snappedY = hit.point.y + snappedHeightOffset + (transform.localScale.y / 2f);
+        }
+
+        ghostObject.transform.position = new Vector3(snappedX, snappedY, snappedZ);
+
+        // 3. Angle Snap
         Vector3 currentEuler = transform.eulerAngles;
         Vector3 snappedEuler = new Vector3(
             Mathf.Round(currentEuler.x / rotationStep) * rotationStep,
