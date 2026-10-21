@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 983330482319446346}
   - component: {fileID: 8563915065841183027}
   - component: {fileID: 9073592339939024214}
+  - component: {fileID: 6472862147585460602}
   m_Layer: 0
   m_Name: Bumper
   m_TagString: Untagged
@@ -253,6 +254,25 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &6472862147585460602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358314990986295167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fb34767edabbf4f821e17a4e05f415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: 0.3
+  heightStep: 5
+  rotationStep: 10
+  snapSurfaces:
+    serializedVersion: 2
+    m_Bits: 0
+  ghostMaterial: {fileID: 2100000, guid: cd9f41a9a23cdea4b942b483b8b7ab4d, type: 2}
 --- !u!1 &386683229571725593
 GameObject:
   m_ObjectHideFlags: 0

@@ -544,7 +544,7 @@ MonoBehaviour:
   snapSurfaces:
     serializedVersion: 2
     m_Bits: 0
-  ghostMaterial: {fileID: 2100000, guid: ae161c523aa7443409f0b7f1f8d2d864, type: 2}
+  ghostMaterial: {fileID: 2100000, guid: cd9f41a9a23cdea4b942b483b8b7ab4d, type: 2}
 --- !u!1 &3062576257710070370
 GameObject:
   m_ObjectHideFlags: 0

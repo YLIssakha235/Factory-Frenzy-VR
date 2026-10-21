@@ -986,6 +986,7 @@ GameObject:
   - component: {fileID: -5830453643552588425}
   - component: {fileID: -3662678200047925126}
   - component: {fileID: 5188879111833255748}
+  - component: {fileID: 9123818864091989650}
   m_Layer: 0
   m_Name: Moving
   m_TagString: Untagged
@@ -1223,7 +1224,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 2
-  isLocked: 0
+--- !u!114 &9123818864091989650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7425747379251120788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fb34767edabbf4f821e17a4e05f415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: 0.3
+  heightStep: 5
+  rotationStep: 10
+  snapSurfaces:
+    serializedVersion: 2
+    m_Bits: 512
+  ghostMaterial: {fileID: 2100000, guid: cd9f41a9a23cdea4b942b483b8b7ab4d, type: 2}
 --- !u!1 &7480967512321919161
 GameObject:
   m_ObjectHideFlags: 0
