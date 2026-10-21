@@ -369,8 +369,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3fb34767edabbf4f821e17a4e05f415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: 0.3
+  gridSize: 1
   heightStep: 1
+  yOffset: 0
   rotationStep: 1
   snapSurfaces:
     serializedVersion: 2

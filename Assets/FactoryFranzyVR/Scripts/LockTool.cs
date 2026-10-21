@@ -28,6 +28,7 @@ public class LockTool : MonoBehaviour
     private bool isLockModeActive = false;
     private bool isCurrentlyHovering = false;
     private System.Collections.Generic.Dictionary<MeshRenderer, Color> originalColors = new System.Collections.Generic.Dictionary<MeshRenderer, Color>();
+    private System.Collections.Generic.Dictionary<XRGrabInteractable, int> originalLayers = new System.Collections.Generic.Dictionary<XRGrabInteractable, int>();
 
     private void Awake()
     {
@@ -107,29 +108,45 @@ public class LockTool : MonoBehaviour
                 controller?.SendHapticImpulse(0.8f, 0.15f);
                 if (toggleSound != null && audioSource != null) audioSource.PlayOneShot(toggleSound);
 
-                // Toggle the grab interactable
-                bool isCurrentlyLocked = !grabInteractable.enabled;
-                grabInteractable.enabled = isCurrentlyLocked;
-
+                // If the interaction layer value is 0, it means it is currently locked
+                bool isCurrentlyLocked = grabInteractable.interactionLayers.value == 0;
                 MeshRenderer renderer = target.GetComponentInChildren<MeshRenderer>();
-                if (renderer != null)
+
+                if (!isCurrentlyLocked) // We are locking it
                 {
-                    if (!isCurrentlyLocked) // We just locked it
+                    // 1. Save original layer and lock it (0 = Nothing)
+                    if (!originalLayers.ContainsKey(grabInteractable))
                     {
-                        // Save the original color to memory before making it gray
+                        originalLayers[grabInteractable] = grabInteractable.interactionLayers.value;
+                    }
+                    grabInteractable.interactionLayers = 0;
+
+                    // 2. Save original color and turn gray
+                    if (renderer != null)
+                    {
                         if (!originalColors.ContainsKey(renderer))
                         {
                             originalColors[renderer] = renderer.material.color;
                         }
                         renderer.material.color = Color.gray;
                     }
-                    else // We just unlocked it
+                }
+                else // We are unlocking it
+                {
+                    // 1. Restore original layer (or default to -1 for 'Everything' if lost)
+                    if (originalLayers.ContainsKey(grabInteractable))
                     {
-                        // Restore the original color from memory
-                        if (originalColors.ContainsKey(renderer))
-                        {
-                            renderer.material.color = originalColors[renderer];
-                        }
+                        grabInteractable.interactionLayers = originalLayers[grabInteractable];
+                    }
+                    else
+                    {
+                        grabInteractable.interactionLayers = -1;
+                    }
+
+                    // 2. Restore original color
+                    if (renderer != null && originalColors.ContainsKey(renderer))
+                    {
+                        renderer.material.color = originalColors[renderer];
                     }
                 }
             }

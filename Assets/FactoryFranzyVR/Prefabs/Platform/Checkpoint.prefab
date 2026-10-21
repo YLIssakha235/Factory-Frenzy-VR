@@ -537,12 +537,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3fb34767edabbf4f821e17a4e05f415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: 0.3
+  gridSize: 1
   heightStep: 1
+  yOffset: 0
   rotationStep: 1
   snapSurfaces:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   ghostMaterial: {fileID: 2100000, guid: cd9f41a9a23cdea4b942b483b8b7ab4d, type: 2}
 --- !u!1 &3062576257710070370
 GameObject:
