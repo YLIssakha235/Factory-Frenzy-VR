@@ -805,7 +805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &267923083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,7 +906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e62d5348d18fa4d9cf61daaf8d99eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelNameInput: {fileID: 0}
+  levelNameInput: {fileID: 1999961688}
   exportButton: {fileID: 2113702557}
   statusText: {fileID: 404581}
 --- !u!114 &267923088
@@ -1561,7 +1561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exportMenuCanvas: {fileID: 267923082}
   vrCamera: {fileID: 526748329}
-  spawnDistance: 1
+  spawnDistance: 2
   menuButtonAction:
     m_UseReference: 0
     m_Action:
@@ -3818,6 +3818,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1999961685}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1999961688 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 411273239196586456, guid: fc9c9985bba9e3842bbaa113cbf985d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1999961685}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2012230795
 GameObject:
   m_ObjectHideFlags: 0

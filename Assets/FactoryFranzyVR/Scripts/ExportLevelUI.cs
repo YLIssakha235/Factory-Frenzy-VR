@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ExportLevelUI : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField levelNameInput;
+    [SerializeField] private InputField levelNameInput;
     [SerializeField] private Button exportButton;
     [SerializeField] private TextMeshProUGUI statusText;
 
