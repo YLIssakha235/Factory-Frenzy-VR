@@ -6,7 +6,6 @@ public class EditableObject : MonoBehaviour
     [Tooltip("Select which of the 9 types this prefab is")]
     public LevelItemType itemType;
 
-    public bool isLocked = false;
     private string instanceId;
 
     private void Awake()
@@ -39,7 +38,6 @@ public class EditableObject : MonoBehaviour
         return new ObjectData
         {
             instanceId = this.instanceId,
-            // Converts your enum (e.g., LevelItemType.Bumper) into a string ("Bumper") for the JSON
             itemType = this.itemType.ToString(),
             position = new SerializableVector3(transform.position),
             rotation = new SerializableQuaternion(transform.rotation),

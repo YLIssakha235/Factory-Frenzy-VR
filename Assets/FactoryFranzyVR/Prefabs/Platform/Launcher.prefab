@@ -613,9 +613,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8515706245461134732}
   - component: {fileID: 6177241085941944249}
-  - component: {fileID: 3848078940863137274}
   - component: {fileID: -1974027463323015593}
   - component: {fileID: -1566843464645338770}
+  - component: {fileID: -8041317348284925559}
   m_Layer: 0
   m_Name: Launcher
   m_TagString: Untagged
@@ -670,27 +670,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &3848078940863137274
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7363783201521863365}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-1974027463323015593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,7 +835,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 6
-  isLocked: 0
+--- !u!114 &-8041317348284925559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363783201521863365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fb34767edabbf4f821e17a4e05f415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: 1
+  heightStep: 1
+  yOffset: 0
+  rotationStep: 1
+  snapSurfaces:
+    serializedVersion: 2
+    m_Bits: 512
+  ghostMaterial: {fileID: 2100000, guid: cd9f41a9a23cdea4b942b483b8b7ab4d, type: 2}
 --- !u!1 &7796640631979285005
 GameObject:
   m_ObjectHideFlags: 0
