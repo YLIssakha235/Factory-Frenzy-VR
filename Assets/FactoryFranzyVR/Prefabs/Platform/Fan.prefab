@@ -5836,6 +5836,7 @@ GameObject:
   - component: {fileID: -7743437036400019095}
   - component: {fileID: -7027192322127476832}
   - component: {fileID: -1711402092427669542}
+  - component: {fileID: 2387852311671634494}
   m_Layer: 0
   m_Name: Fan
   m_TagString: Untagged
@@ -6074,7 +6075,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 7
-  isLocked: 0
+--- !u!114 &2387852311671634494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8298207010244147042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fb34767edabbf4f821e17a4e05f415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: 0.3
+  heightStep: 1
+  rotationStep: 1
+  snapSurfaces:
+    serializedVersion: 2
+    m_Bits: 512
+  ghostMaterial: {fileID: 2100000, guid: cd9f41a9a23cdea4b942b483b8b7ab4d, type: 2}
 --- !u!1 &8694203286054048390
 GameObject:
   m_ObjectHideFlags: 0

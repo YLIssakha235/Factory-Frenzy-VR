@@ -525,7 +525,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 3
-  isLocked: 0
 --- !u!114 &6451120295414148368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,8 +538,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 0.3
-  heightStep: 5
-  rotationStep: 10
+  heightStep: 1
+  rotationStep: 1
   snapSurfaces:
     serializedVersion: 2
     m_Bits: 0

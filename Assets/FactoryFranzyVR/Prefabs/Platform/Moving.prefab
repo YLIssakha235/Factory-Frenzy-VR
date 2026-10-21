@@ -1237,8 +1237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 0.3
-  heightStep: 5
-  rotationStep: 10
+  heightStep: 1
+  rotationStep: 1
   snapSurfaces:
     serializedVersion: 2
     m_Bits: 512
