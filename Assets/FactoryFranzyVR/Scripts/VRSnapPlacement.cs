@@ -7,7 +7,7 @@ public class VRSnapPlacement : MonoBehaviour
     [Header("Snap Settings")]
     public float gridSize = 0.3f;
     public float heightStep = 5.0f;
-    public float yOffset = 0f;       // NEW: Fine-tune vertical resting position
+    public float yOffset = 0f;
     public float rotationStep = 10f;
     public LayerMask snapSurfaces;
     public Material ghostMaterial;
@@ -15,9 +15,19 @@ public class VRSnapPlacement : MonoBehaviour
     private XRGrabInteractable grabInteractable;
     private GameObject ghostObject;
 
+    private bool originalTrackRotation;
+    private bool wasSmart;
+    private Quaternion gripOffset;   // object rotation relative to the hand when smart mode starts
+
+    private void OnValidate()
+    {
+        rotationStep = Mathf.Max(1f, rotationStep);
+    }
+
     private void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
+        originalTrackRotation = grabInteractable.trackRotation;
         grabInteractable.selectExited.AddListener(OnRelease);
 
         ghostObject = new GameObject(gameObject.name + "_Ghost");
@@ -34,7 +44,23 @@ public class VRSnapPlacement : MonoBehaviour
 
     private void Update()
     {
-        if (!grabInteractable.isSelected || !SmartPlacementToggler.IsSmartModeActive)
+        bool smart = grabInteractable.isSelected && SmartPlacementToggler.IsSmartModeActive;
+
+        // Entering / leaving smart mode
+        if (smart != wasSmart)
+        {
+            wasSmart = smart;
+            grabInteractable.trackRotation = smart ? false : originalTrackRotation;
+
+            if (smart)
+            {
+                Transform attach = grabInteractable.firstInteractorSelecting
+                                   .GetAttachTransform(grabInteractable);
+                gripOffset = Quaternion.Inverse(attach.rotation) * transform.rotation;
+            }
+        }
+
+        if (!smart)
         {
             if (ghostObject.activeSelf) ghostObject.SetActive(false);
             return;
@@ -42,6 +68,7 @@ public class VRSnapPlacement : MonoBehaviour
 
         if (!ghostObject.activeSelf) ghostObject.SetActive(true);
 
+        // Position (unchanged)
         Vector3 currentPos = transform.position;
         float snappedX = Mathf.Round(currentPos.x / gridSize) * gridSize;
         float snappedZ = Mathf.Round(currentPos.z / gridSize) * gridSize;
@@ -52,20 +79,31 @@ public class VRSnapPlacement : MonoBehaviour
             float heightAboveFloor = currentPos.y - hit.point.y;
             float snappedHeightOffset = Mathf.Round(heightAboveFloor / heightStep) * heightStep;
             snappedHeightOffset = Mathf.Max(0, snappedHeightOffset);
-
-            // FIX: Replaced automatic scale math with a manual offset
             snappedY = hit.point.y + snappedHeightOffset + yOffset;
         }
 
         ghostObject.transform.position = new Vector3(snappedX, snappedY, snappedZ);
+    }
 
-        Vector3 currentEuler = transform.eulerAngles;
-        Vector3 snappedEuler = new Vector3(
-            Mathf.Round(currentEuler.x / rotationStep) * rotationStep,
-            Mathf.Round(currentEuler.y / rotationStep) * rotationStep,
-            Mathf.Round(currentEuler.z / rotationStep) * rotationStep
+    private void LateUpdate()
+    {
+        if (!wasSmart) return;
+
+        // Rotation the object WOULD have if it followed the hand freely
+        Transform attach = grabInteractable.firstInteractorSelecting
+                           ?.GetAttachTransform(grabInteractable);
+        if (attach == null) return;
+
+        Vector3 e = (attach.rotation * gripOffset).eulerAngles;
+        Quaternion snapped = Quaternion.Euler(
+            Mathf.Round(e.x / rotationStep) * rotationStep,
+            Mathf.Round(e.y / rotationStep) * rotationStep,
+            Mathf.Round(e.z / rotationStep) * rotationStep
         );
-        ghostObject.transform.rotation = Quaternion.Euler(snappedEuler);
+
+        // The held object itself now rotates in steps, and the ghost matches it
+        transform.rotation = snapped;
+        ghostObject.transform.rotation = snapped;
     }
 
     private void OnRelease(SelectExitEventArgs args)
