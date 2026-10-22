@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -25,7 +26,7 @@ public class LockTool : MonoBehaviour
     private Gradient normalGradient;
     private Gradient lockHoverGradient;
 
-    private bool isLockModeActive = false;
+    public static bool isLockModeActive = false;
     private bool isCurrentlyHovering = false;
     private System.Collections.Generic.Dictionary<MeshRenderer, Color> originalColors = new System.Collections.Generic.Dictionary<MeshRenderer, Color>();
     private System.Collections.Generic.Dictionary<XRGrabInteractable, int> originalLayers = new System.Collections.Generic.Dictionary<XRGrabInteractable, int>();
