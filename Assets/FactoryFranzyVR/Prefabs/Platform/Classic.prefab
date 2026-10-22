@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
   m_Colliders:
-  - {fileID: 0}
+  - {fileID: 5849461289807923388}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -904,6 +904,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teleport
       objectReference: {fileID: 0}
+    - target: {fileID: 1378329639358014996, guid: 3ca9752aef2223345b2ca98070040b2e,
+        type: 3}
+      propertyPath: m_Colliders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378329639358014996, guid: 3ca9752aef2223345b2ca98070040b2e,
+        type: 3}
+      propertyPath: m_Colliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 2576153330812780424}
     - target: {fileID: 4161899540671879203, guid: 3ca9752aef2223345b2ca98070040b2e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -959,6 +969,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca9752aef2223345b2ca98070040b2e, type: 3}
+--- !u!65 &2576153330812780424 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3798408407399729874, guid: 3ca9752aef2223345b2ca98070040b2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1690817558474913114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3365583139173313913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4161899540671879203, guid: 3ca9752aef2223345b2ca98070040b2e,
