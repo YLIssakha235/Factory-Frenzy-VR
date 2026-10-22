@@ -4,177 +4,208 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GetKeyCode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
+public class GetKeyCode : MonoBehaviour,
+    IPointerEnterHandler,
+    IPointerExitHandler,
+    IPointerDownHandler,
+    IPointerUpHandler,
+    IPointerClickHandler
 {
     public Color32 mNormalColor = Color.white;
     public Color32 mHoverColor = Color.gray;
     public Color32 mDownColor = Color.red;
-    
-    private OpenVirtualKeyboard keyboardController; // virtual keyboard controller
-    private Image buttonImage;                      // key Image
-    private string buttonString;                    // key string
-    private Text showString;                        // key string (show)
 
-    private InputField inputTarget;                 // the key will input to this input field
+    private OpenVirtualKeyboard keyboardController;
+    private Image buttonImage;
+    private string buttonString;
+    private Text showString;
+    private InputField inputTarget;
 
-    private bool toLowLetterCase;                   // save the statement of keyboard letters
-    private readonly CultureInfo cult = new CultureInfo("en-US", false);
-    
+    private bool toLowLetterCase;
+    private readonly CultureInfo cult =
+        new CultureInfo("en-US", false);
+
     private void OnEnable()
     {
         if (keyboardController == null)
-            keyboardController = GameObject.Find("Virtual Keyboard Controller").GetComponent<OpenVirtualKeyboard>();
-        
-        if(buttonImage == null)
+        {
+            GameObject controller =
+                GameObject.Find("Virtual Keyboard Controller");
+
+            if (controller != null)
+                keyboardController =
+                    controller.GetComponent<OpenVirtualKeyboard>();
+        }
+
+        if (buttonImage == null)
             buttonImage = GetComponent<Image>();
-        
-        if(buttonString == null)
+
+        if (buttonString == null)
             buttonString = transform.name;
 
         if (showString == null)
-            showString = transform.Find("Text").GetComponent<Text>();
+        {
+            Transform textObject = transform.Find("Text");
+
+            if (textObject != null)
+                showString = textObject.GetComponent<Text>();
+        }
     }
 
     private void Update()
     {
         if (toLowLetterCase == LetterCaseDetection.Lowercase)
             return;
-        
+
         toLowLetterCase = LetterCaseDetection.Lowercase;
-        
-        // determine the button string is english or not
-        if (Regex.IsMatch(buttonString, "^[a-zA-Z0-9]*$") && 
-            !(string.Equals(buttonString, "delete") || string.Equals(buttonString, "clear") || 
-              string.Equals(buttonString, "backward") || string.Equals(buttonString, "forward") ||
-              string.Equals(buttonString, "Letter case") || string.Equals(buttonString, "To0") ||
-              string.Equals(buttonString, "ToLast")))
+
+        if (Regex.IsMatch(buttonString, "^[a-zA-Z0-9]*$") &&
+            !IsSpecialKey(buttonString))
         {
-            buttonString = toLowLetterCase ? buttonString.ToLower(cult) : buttonString.ToUpper(cult);
-            showString.text = buttonString;
+            buttonString = toLowLetterCase
+                ? buttonString.ToLower(cult)
+                : buttonString.ToUpper(cult);
+
+            if (showString != null)
+                showString.text = buttonString;
         }
+    }
+
+    private bool IsSpecialKey(string key)
+    {
+        return key == "delete" ||
+               key == "clear" ||
+               key == "backward" ||
+               key == "forward" ||
+               key == "Letter case" ||
+               key == "To0" ||
+               key == "ToLast";
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        keyboardController.onExitKeyboardArea = false;
-        buttonImage.color = mHoverColor;
+        if (keyboardController != null)
+            keyboardController.onExitKeyboardArea = false;
+
+        if (buttonImage != null)
+            buttonImage.color = mHoverColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        keyboardController.onExitKeyboardArea = false;
-        buttonImage.color = mNormalColor;
+        if (keyboardController != null)
+            keyboardController.onExitKeyboardArea = false;
+
+        if (buttonImage != null)
+            buttonImage.color = mNormalColor;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        buttonImage.color = mDownColor;
+        if (buttonImage != null)
+            buttonImage.color = mDownColor;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (buttonImage != null)
+            buttonImage.color = mHoverColor;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        keyboardController.onExitKeyboardArea = false;
-        buttonImage.color = mHoverColor;
-        
+        if (keyboardController != null)
+            keyboardController.onExitKeyboardArea = false;
+
+        if (buttonImage != null)
+            buttonImage.color = mHoverColor;
+
         string target = GetInputFieldTarget.SelectInputFieldName;
-        int index = GetInputFieldTarget.Index;
-        
-        if(inputTarget == null)
-            inputTarget = GameObject.Find(GetInputFieldTarget.SelectInputFieldName).GetComponent<InputField>();
-        
-        if (inputTarget.gameObject.name != target)
+
+        if (string.IsNullOrEmpty(target))
         {
-#if(UNITY_EDITOR)
-            print("change target");
-#endif
-            inputTarget = GameObject.Find(target).GetComponent<InputField>();
+            Debug.LogWarning("No input field selected.");
+            return;
         }
-        
-#if(UNITY_EDITOR)
-        print("You now click = " + buttonString);
-        print("Your input target = " + inputTarget.gameObject.name);
-        print("Your input index in target = " + index);
-#endif
-        
+
+        GameObject targetObject = GameObject.Find(target);
+
+        if (targetObject == null)
+        {
+            Debug.LogWarning("Input field not found: " + target);
+            return;
+        }
+
+        inputTarget = targetObject.GetComponent<InputField>();
+
+        if (inputTarget == null)
+        {
+            Debug.LogWarning(
+                "No standard InputField component on: " + target);
+            return;
+        }
+
         string targetText = inputTarget.text;
-        if (!(string.Equals(buttonString, "delete") || string.Equals(buttonString, "clear") || 
-            string.Equals(buttonString, "backward") || string.Equals(buttonString, "forward") ||
-            string.Equals(buttonString, "Letter case") || string.Equals(buttonString, "To0") ||
-            string.Equals(buttonString, "ToLast")))
+
+        int index = Mathf.Clamp(
+            GetInputFieldTarget.Index,
+            0,
+            targetText.Length
+        );
+
+        GetInputFieldTarget.Index = index;
+
+        if (!IsSpecialKey(buttonString))
         {
-            inputTarget.text = targetText.Insert(index, buttonString);
-#if(UNITY_EDITOR)
-            print("inputTarget.text = " + inputTarget.text);
-#endif
-            GetInputFieldTarget.Index++;
+            inputTarget.text =
+                targetText.Insert(index, buttonString);
+
+            GetInputFieldTarget.Index =
+                index + buttonString.Length;
+
+            return;
         }
-        else
+
+        switch (buttonString)
         {
-            switch (buttonString)
-            {
-                case "delete":
-                    if (GetInputFieldTarget.Index > 0)
-                    {
-                        GetInputFieldTarget.Index--;
-                        inputTarget.text = targetText.Remove(GetInputFieldTarget.Index, 1);
-                    }
-#if(UNITY_EDITOR)
-                    print("inputTarget.text.Length = " + inputTarget.text.Length);
-                    print("GetInputFieldTarget.Index = " + GetInputFieldTarget.Index);
-#endif
-                    break;
-                case "clear":
-                    if (inputTarget.text.Length > 0)
-                    {
-                        inputTarget.text = targetText.Remove(0);
-                        GetInputFieldTarget.Index = 0;
-                    }
-#if(UNITY_EDITOR)
-                    print("inputTarget.text.Length = " + inputTarget.text.Length);
-                    print("GetInputFieldTarget.Index = " + GetInputFieldTarget.Index);
-#endif
-                    break;
-                case "backward":
-                    if(GetInputFieldTarget.Index > 0)
-                        GetInputFieldTarget.Index--;
-#if(UNITY_EDITOR)
-                    print("inputTarget.text.Length = " + inputTarget.text.Length);
-                    print("GetInputFieldTarget.Index = " + GetInputFieldTarget.Index);
-#endif
-                    break;
-                case "forward":
-                    if (GetInputFieldTarget.Index < inputTarget.text.Length)
-                        GetInputFieldTarget.Index++;
-#if(UNITY_EDITOR)
-                    print("inputTarget.text.Length = " + inputTarget.text.Length);
-                    print("GetInputFieldTarget.Index = " + GetInputFieldTarget.Index);
-#endif
-                    break;
-                case "Letter case":
-                    LetterCaseDetection.Lowercase = !LetterCaseDetection.Lowercase;
-#if(UNITY_EDITOR)
-                    print("LetterCaseDetection.Lowercase = " + LetterCaseDetection.Lowercase);
-#endif
-                    break;
-                case "ToLast":
-                    GetInputFieldTarget.Index = inputTarget.text.Length;
-#if(UNITY_EDITOR)
-                    print("inputTarget.text.Length = " + inputTarget.text.Length);
-                    print("GetInputFieldTarget.Index = " + GetInputFieldTarget.Index);
-#endif
-                    break;
-                case "To0":
-                    GetInputFieldTarget.Index = 0;
-#if(UNITY_EDITOR)
-                    print("inputTarget.text.Length = " + inputTarget.text.Length);
-                    print("GetInputFieldTarget.Index = " + GetInputFieldTarget.Index);
-#endif
-                    break;
-            }
+            case "delete":
+                if (index > 0)
+                {
+                    inputTarget.text =
+                        targetText.Remove(index - 1, 1);
+
+                    GetInputFieldTarget.Index = index - 1;
+                }
+                break;
+
+            case "clear":
+                inputTarget.text = "";
+                GetInputFieldTarget.Index = 0;
+                break;
+
+            case "backward":
+                GetInputFieldTarget.Index =
+                    Mathf.Max(0, index - 1);
+                break;
+
+            case "forward":
+                GetInputFieldTarget.Index =
+                    Mathf.Min(targetText.Length, index + 1);
+                break;
+
+            case "Letter case":
+                LetterCaseDetection.Lowercase =
+                    !LetterCaseDetection.Lowercase;
+                break;
+
+            case "ToLast":
+                GetInputFieldTarget.Index =
+                    inputTarget.text.Length;
+                break;
+
+            case "To0":
+                GetInputFieldTarget.Index = 0;
+                break;
         }
     }
 }
