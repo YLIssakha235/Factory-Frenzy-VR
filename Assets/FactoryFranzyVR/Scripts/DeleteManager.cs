@@ -25,7 +25,7 @@ public class DeleteManager : MonoBehaviour
     private Gradient normalGradient;
     private Gradient deleteHoverGradient;
 
-    private bool isDeleteModeActive = false;
+    public static bool isDeleteModeActive = false;
     private bool isCurrentlyHovering = false;
 
     private void Awake()
