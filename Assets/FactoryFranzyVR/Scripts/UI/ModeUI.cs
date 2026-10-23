@@ -10,7 +10,6 @@ public class ModesUI : MonoBehaviour
 
     void Update()
     {
-        // 1. Smart Snap
         if (smartModeText != null)
         {
             if (SmartPlacementToggler.IsSmartModeActive)
@@ -25,10 +24,8 @@ public class ModesUI : MonoBehaviour
             }
         }
 
-        // 2. Delete Mode
         if (deleteModeText != null)
         {
-            // REPLACE 'IsDeleteModeActive' with the actual variable name in your DeleteManager script
             if (DeleteManager.isDeleteModeActive)
             {
                 deleteModeText.text = "Delete: ON";
@@ -41,10 +38,8 @@ public class ModesUI : MonoBehaviour
             }
         }
 
-        // 3. Freeze Mode
         if (freezeModeText != null)
         {
-            // REPLACE 'IsFreezeModeActive' with the actual variable name in your LockTool script
             if (LockTool.isLockModeActive)
             {
                 freezeModeText.text = "Freeze: ON";

@@ -10,13 +10,11 @@ public class EditableObject : MonoBehaviour
 
     private void Awake()
     {
-        // Generate a unique ID for this specific block in the level
         instanceId = System.Guid.NewGuid().ToString();
     }
 
     private void Start()
     {
-        // Tell the LevelManager that this object exists in the scene
         if (LevelManager.Instance != null)
         {
             LevelManager.Instance.RegisterObject(this);
@@ -25,14 +23,12 @@ public class EditableObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Remove it from the export list if you delete it with your VR laser
         if (LevelManager.Instance != null)
         {
             LevelManager.Instance.UnregisterObject(this);
         }
     }
 
-    // The LevelManager calls this when you press the Export button
     public ObjectData ToData()
     {
         return new ObjectData

@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class SmartPlacementToggler : MonoBehaviour
 {
-    // Global variable that all objects can check
     public static bool IsSmartModeActive = false;
 
     [SerializeField] private InputActionProperty toggleButton;

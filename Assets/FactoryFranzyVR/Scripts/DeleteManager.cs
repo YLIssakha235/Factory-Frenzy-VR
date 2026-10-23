@@ -33,13 +33,12 @@ public class DeleteManager : MonoBehaviour
         if (lineVisual == null)
             lineVisual = GetComponent<XRInteractorLineVisual>();
 
-        // Dedicated AudioSource avoids instantiation latency on delete
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.playOnAwake = false;
-            audioSource.spatialBlend = 0f; // 2D clean playback directly in ears, or 1f for 3D positional
+            audioSource.spatialBlend = 0f; 
         }
 
         normalGradient = CreateSolidGradient(normalColor);
@@ -63,7 +62,6 @@ public class DeleteManager : MonoBehaviour
 
     private void Update()
     {
-        // 1. Toggle Delete Mode on/off
         if (toggleDeleteModeAction.action != null && toggleDeleteModeAction.action.WasPressedThisFrame())
         {
             isDeleteModeActive = !isDeleteModeActive;
@@ -77,10 +75,8 @@ public class DeleteManager : MonoBehaviour
 
         if (!isDeleteModeActive) return;
 
-        // 2. Continuously check what the ray is pointing at
         UpdateRayHoverState();
 
-        // 3. Confirm deletion on trigger pull
         if (confirmDeleteAction.action != null && confirmDeleteAction.action.WasPressedThisFrame())
         {
             TryDeleteTarget();
@@ -119,7 +115,6 @@ public class DeleteManager : MonoBehaviour
 
             controller?.SendHapticImpulse(0.8f, 0.15f);
 
-            // Play sound immediately before object destruction
             if (deleteSound != null && audioSource != null)
             {
                 audioSource.PlayOneShot(deleteSound);

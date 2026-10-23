@@ -32,7 +32,6 @@ public class ExportLevelUI : MonoBehaviour
             return;
         }
 
-        // Save directly via the LevelManager
         LevelManager.Instance.SaveLevel(levelName);
 
         if (statusText != null)

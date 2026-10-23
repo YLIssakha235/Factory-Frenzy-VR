@@ -13,11 +13,9 @@ public class SpawnGrab : XRBaseInteractable
 
         if (prefabToSpawn == null) return;
 
-        // 1. Get the controller/ray interactor that grabbed this 2D card
         IXRSelectInteractor interactor = args.interactorObject;
         if (interactor == null) return;
 
-        // 2. Position the new object directly at the hand/controller transform
         Transform handTransform = interactor.transform;
         GameObject spawned = Instantiate(
             prefabToSpawn,
@@ -25,11 +23,9 @@ public class SpawnGrab : XRBaseInteractable
             handTransform.rotation
         );
 
-        // 3. Hand over the new object to the same controller immediately
         if (spawned.TryGetComponent<XRGrabInteractable>(out var grabInteractable))
         {
 
-            // Grab the real 3D platform or trap
             interactionManager.SelectEnter(interactor, grabInteractable);
         }
     }

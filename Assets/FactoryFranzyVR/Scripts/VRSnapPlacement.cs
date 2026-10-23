@@ -30,7 +30,7 @@ public class VRSnapPlacement : MonoBehaviour
 
     [Header("Ghost")]
     public Material ghostMaterial;
-    public Material ghostSnapMaterial;   // highlighted when snapped to another platform
+    public Material ghostSnapMaterial;  
 
     private XRGrabInteractable grabInteractable;
     private Rigidbody rb;
@@ -68,7 +68,6 @@ public class VRSnapPlacement : MonoBehaviour
     {
         ghostObject = new GameObject(gameObject.name + "_Ghost");
 
-        // Copy every mesh with its pose relative to this object's root
         foreach (var mf in GetComponentsInChildren<MeshFilter>())
         {
             var part = new GameObject(mf.name);
@@ -120,7 +119,6 @@ public class VRSnapPlacement : MonoBehaviour
                            ?.GetAttachTransform(grabInteractable);
         if (attach == null) return;
 
-        // 1. Stepped + limited rotation (free rotation of the hand -> notches)
         Quaternion free = attach.rotation * gripOffset;
         Vector3 e = (Quaternion.Inverse(referenceRot) * free).eulerAngles;
         float x = Mathf.DeltaAngle(0f, e.x);
@@ -132,16 +130,14 @@ public class VRSnapPlacement : MonoBehaviour
         z = Mathf.Clamp(Mathf.Round(z / rotationStep) * rotationStep, -maxAngle.z, maxAngle.z);
 
         Quaternion steppedRot = referenceRot * Quaternion.Euler(x, y, z);
-        transform.rotation = steppedRot;   // snap points follow, so queries below are up to date
+        transform.rotation = steppedRot;   
 
-        // 2. Platform-to-platform snap (has priority over the grid)
         Vector3 targetPos;
         Quaternion targetRot = steppedRot;
         bool snapped = enablePlatformSnap && TryFindPlatformSnap(out targetPos, out targetRot);
 
         if (!snapped)
         {
-            // 3. Otherwise: grid snap
             targetPos = GridSnap(transform.position);
             targetRot = steppedRot;
         }
@@ -188,7 +184,6 @@ public class VRSnapPlacement : MonoBehaviour
         SnapPoint bestOther = null;
         float bestDist = float.MaxValue;
 
-        // Closest pair between my snap points and the other platforms' snap points
         foreach (var mine in mySnapPoints)
         {
             var hits = Physics.OverlapSphere(mine.transform.position, snapRadius,
@@ -208,11 +203,9 @@ public class VRSnapPlacement : MonoBehaviour
 
         if (alignRotationOnSnap)
         {
-            // My face must look the opposite way of the target face (same red axis)
             Quaternion baseRot = bestOther.transform.rotation * Quaternion.AngleAxis(180f, Vector3.right);
             Vector3 up = baseRot * Vector3.up;
 
-            // Free twist around the contact normal, constrained to the step
             Vector3 refFwd = baseRot * Vector3.forward;
             Vector3 curFwd = Vector3.ProjectOnPlane(bestMine.rotation * Vector3.forward, up);
             float twist = curFwd.sqrMagnitude > 1e-6f ? Vector3.SignedAngle(refFwd, curFwd, up) : 0f;
@@ -223,7 +216,6 @@ public class VRSnapPlacement : MonoBehaviour
             rootRot = snapRot * Quaternion.Inverse(mineLocalRot);
         }
 
-        // Offset of my snap point from my root, measured in the unrotated frame
         Vector3 offset = Quaternion.Inverse(transform.rotation) * (bestMine.position - transform.position);
 
         rot = rootRot;

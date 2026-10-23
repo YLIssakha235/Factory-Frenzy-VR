@@ -1,4 +1,3 @@
-//using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -109,20 +108,17 @@ public class LockTool : MonoBehaviour
                 controller?.SendHapticImpulse(0.8f, 0.15f);
                 if (toggleSound != null && audioSource != null) audioSource.PlayOneShot(toggleSound);
 
-                // If the interaction layer value is 0, it means it is currently locked
                 bool isCurrentlyLocked = grabInteractable.interactionLayers.value == 0;
                 MeshRenderer renderer = target.GetComponentInChildren<MeshRenderer>();
 
-                if (!isCurrentlyLocked) // We are locking it
+                if (!isCurrentlyLocked) 
                 {
-                    // 1. Save original layer and lock it (0 = Nothing)
                     if (!originalLayers.ContainsKey(grabInteractable))
                     {
                         originalLayers[grabInteractable] = grabInteractable.interactionLayers.value;
                     }
                     grabInteractable.interactionLayers = 0;
 
-                    // 2. Save original color and turn gray
                     if (renderer != null)
                     {
                         if (!originalColors.ContainsKey(renderer))
@@ -132,9 +128,8 @@ public class LockTool : MonoBehaviour
                         renderer.material.color = Color.gray;
                     }
                 }
-                else // We are unlocking it
+                else 
                 {
-                    // 1. Restore original layer (or default to -1 for 'Everything' if lost)
                     if (originalLayers.ContainsKey(grabInteractable))
                     {
                         grabInteractable.interactionLayers = originalLayers[grabInteractable];
@@ -144,7 +139,6 @@ public class LockTool : MonoBehaviour
                         grabInteractable.interactionLayers = -1;
                     }
 
-                    // 2. Restore original color
                     if (renderer != null && originalColors.ContainsKey(renderer))
                     {
                         renderer.material.color = originalColors[renderer];

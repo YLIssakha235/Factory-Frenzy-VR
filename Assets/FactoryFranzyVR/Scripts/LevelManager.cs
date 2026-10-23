@@ -26,7 +26,6 @@ public class LevelManager : MonoBehaviour
 
     public string GetFullFilePath(string levelName)
     {
-        // CHANGED: Now saves to the StreamingAssets folder
         string dir = Path.Combine(Application.streamingAssetsPath, "ExportedLevels");
         if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 
@@ -34,7 +33,6 @@ public class LevelManager : MonoBehaviour
         return Path.Combine(dir, $"{sanitized}.json");
     }
 
-    // Used by the UI to check for the overwrite warning
     public bool DoesLevelFileExist(string levelName)
     {
         return File.Exists(GetFullFilePath(levelName));
@@ -55,12 +53,10 @@ public class LevelManager : MonoBehaviour
             levelData.objects.Add(editable.ToData());
         }
 
-        // Fulfills the JsonUtility requirement
         string json = JsonUtility.ToJson(levelData, true);
         File.WriteAllText(filePath, json);
         Debug.Log($"[LevelManager] Exported JSON to: {filePath}");
 
-        // CHANGED: Forces Unity to refresh the Project window so the file appears instantly
 #if UNITY_EDITOR
         UnityEditor.AssetDatabase.Refresh();
 #endif
@@ -69,7 +65,6 @@ public class LevelManager : MonoBehaviour
     [ContextMenu("Test Save Level")]
     public void TestSaveLevel()
     {
-        // This will automatically save a file named "Test_Level_01.json"
         SaveLevel("Test_Level_01");
     }
 }
